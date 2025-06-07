@@ -6,6 +6,8 @@ import useAxiosPublic from '../../../hooks/UseAxiosPublic';
 import { useLanguage } from '../../../providers/LanguageProvider';
 
 const TeacherCard = ({ tutor, onClick }) => {
+  const { translate } = useLanguage();
+  
   return (
     <div 
       className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 transform hover:-translate-y-1 cursor-pointer w-full mx-auto flex flex-col h-full"
@@ -17,37 +19,30 @@ const TeacherCard = ({ tutor, onClick }) => {
         <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
           <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800">
             <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-green-500 rounded-full mr-1.5 sm:mr-2"></span>
-            Available
+            {translate('available')}
           </span>
         </div>
 
         {/* Profile Photo */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-4 border-white shadow-md overflow-hidden">
+        <div className="flex items-center gap-4">
+          <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
             <img
-              src={tutor.photoURL || 'https://i.ibb.co.com/gxzxFJk/profile12.jpg'}
+              src={tutor.photoURL || "https://i.ibb.co/0jqHpnp/default-user.png"}
               alt={tutor.name}
               className="w-full h-full object-cover"
-              onError={(e) => (e.target.src = 'https://via.placeholder.com/150?text=Tutor')}
             />
           </div>
-          <div className="flex-1">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">{tutor.name}</h3>
-            <div className="flex items-center space-x-1">
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className={index < Math.floor(tutor.rating || 4.5) ? 'text-yellow-400' : 'text-gray-300'}
-                  size={12}
-                />
-              ))}
-              <span className="ml-2 text-xs sm:text-sm text-gray-600">{tutor.rating || '4.5'}/5</span>
+          <div>
+            <h3 className="text-lg sm:text-xl font-bold text-[#005482]">{tutor.name}</h3>
+            <div className="flex items-center gap-1 text-yellow-400 mt-1">
+              <FaStar />
+              <span className="text-sm text-gray-600">4.9 (127)</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content Sections */}
+      {/* Details Grid */}
       <div className="px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-5 flex-1">
         {/* Education and Subjects */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -55,7 +50,7 @@ const TeacherCard = ({ tutor, onClick }) => {
             <div className="flex items-start space-x-2 sm:space-x-3">
               <FaGraduationCap className="text-[#005482] mt-1 flex-shrink-0" size={14} />
               <div>
-                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">Education</h4>
+                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">{translate('education')}</h4>
                 <p className="text-xs sm:text-sm text-gray-800 font-medium">
                   {tutor.educationalQualifications || 'BSc in Mathematics, NSU'}
                 </p>
@@ -64,8 +59,8 @@ const TeacherCard = ({ tutor, onClick }) => {
             <div className="flex items-start space-x-2 sm:space-x-3">
               <FaUserClock className="text-[#005482] mt-1 flex-shrink-0" size={14} />
               <div>
-                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">Experience</h4>
-                <p className="text-xs sm:text-sm text-gray-800 font-medium">{tutor.experience}+ Years</p>
+                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">{translate('experience')}</h4>
+                <p className="text-xs sm:text-sm text-gray-800 font-medium">{tutor.experience}+ {translate('yearsExperience')}</p>
               </div>
             </div>
           </div>
@@ -73,7 +68,7 @@ const TeacherCard = ({ tutor, onClick }) => {
             <div className="flex items-start space-x-2 sm:space-x-3">
               <FaBook className="text-[#005482] mt-1 flex-shrink-0" size={14} />
               <div>
-                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">Subjects</h4>
+                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">{translate('subjects')}</h4>
                 <p className="text-xs sm:text-sm text-gray-800 font-medium">
                   {tutor.subjects?.join(', ') || 'Mathematics, Physics'}
                 </p>
@@ -82,8 +77,8 @@ const TeacherCard = ({ tutor, onClick }) => {
             <div className="flex items-start space-x-2 sm:space-x-3">
               <FaChalkboardTeacher className="text-[#005482] mt-1 flex-shrink-0" size={14} />
               <div>
-                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">Mode</h4>
-                <p className="text-xs sm:text-sm text-gray-800 font-medium">{tutor.teachingMode || 'Online & In-person'}</p>
+                <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">{translate('teachingMode')}</h4>
+                <p className="text-xs sm:text-sm text-gray-800 font-medium">{tutor.teachingMode || translate('onlineInPerson')}</p>
               </div>
             </div>
           </div>
@@ -93,7 +88,7 @@ const TeacherCard = ({ tutor, onClick }) => {
         <div className="flex items-start space-x-2 sm:space-x-3 pt-2 border-t border-gray-100">
           <FaGlobe className="text-[#005482] mt-1 flex-shrink-0" size={14} />
           <div>
-            <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">Languages</h4>
+            <h4 className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium">{translate('languages')}</h4>
             <p className="text-xs sm:text-sm text-gray-800 font-medium">
               {tutor.languages?.join(', ') || 'English, +2 more'}
             </p>
@@ -106,7 +101,7 @@ const TeacherCard = ({ tutor, onClick }) => {
         <button 
           className="w-full bg-[#DA3A60] text-white py-2.5 sm:py-3 rounded-lg hover:bg-[#c43255] transition-all duration-300 font-medium flex items-center justify-center gap-2 text-sm sm:text-base transform hover:scale-105"
         >
-          View Full Profile
+          {translate('viewFullProfile')}
           <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
           </svg>
