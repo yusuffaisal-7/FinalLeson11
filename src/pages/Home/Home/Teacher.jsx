@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { FaStar, FaGraduationCap, FaBook, FaGlobe, FaUserClock, FaChalkboardTeacher } from 'react-icons/fa';
@@ -115,6 +115,7 @@ const Teacher = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { translate } = useLanguage();
+  const [showAll, setShowAll] = useState(false);
 
   const { data: tutors = [], isLoading, error } = useQuery({
     queryKey: ['tutors'],
@@ -140,7 +141,7 @@ const Teacher = () => {
     );
   }
 
-  const displayedTutors = tutors.slice(0, 6);
+  const displayedTutors = showAll ? tutors : tutors.slice(0, 3);
 
   return (
     <section className="w-full bg-gray-50 py-10 sm:py-12 md:py-16">
@@ -181,6 +182,25 @@ const Teacher = () => {
             />
           ))}
         </div>
+
+        {tutors.length > 3 && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="bg-[#DA3A60] text-white px-8 py-3 rounded-lg hover:bg-[#c43255] transition-all duration-300 font-medium transform hover:scale-105 flex items-center gap-2 mx-auto"
+            >
+              {showAll ? translate('showLess') : translate('showMore')}
+              <svg 
+                className={`w-4 h-4 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

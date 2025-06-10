@@ -118,13 +118,13 @@ const Message = () => {
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#DA3A60] bg-opacity-10 rounded-full flex items-center justify-center">
                       <FaEnvelope className="text-[#DA3A60] text-lg sm:text-xl" />
                     </div>
-                    <span className="text-sm sm:text-base">support@lessonpaw.com</span>
+                    <span className="text-sm sm:text-base">support@lesonpaw.com</span>
                   </div>
                   <div className="flex items-center space-x-3 sm:space-x-4 text-gray-600">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#DA3A60] bg-opacity-10 rounded-full flex items-center justify-center">
                       <FaHeadset className="text-[#DA3A60] text-lg sm:text-xl" />
                     </div>
-                    <span className="text-sm sm:text-base">+1 (555) 123-4567</span>
+                    <span className="text-sm sm:text-base">+1 (509) 3701 9232</span>
                   </div>
                 </div>
               </motion.div>

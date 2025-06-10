@@ -403,7 +403,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-[#DA3A60]" />
-                <span>info@jobpaw.com</span>
+                <span>info@lesonpaw.com</span>
               </li>
             </ul>
           </div>
